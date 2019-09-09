@@ -1,5 +1,5 @@
 
-const recipes = [
+let recipes = [
   {
     id: "5d712605475d213733780097",
     image_url: "https://imageurlRandom.com/image.png",

@@ -23,7 +23,7 @@ app.post('/api/recipes', (req, res) => {
   };
   
   recipes.push(newRecipes);
-  res.json(recipes);
+  res.json({ msg: "new recipe added!"});
 });
 
 app.put('/api/recipes', (req, res) => {
@@ -31,18 +31,24 @@ app.put('/api/recipes', (req, res) => {
   const name = req.body.name;
   const image_url = req.body.image_url;
 
-  // find the data of the id.
-  // update that object
-  // response = updated list
-  
+  const index = recipes.findIndex(k => k.id == id);
 
+  recipes[index] = {
+    id: id,
+    name: name,
+    image_url,
+  }
+  res.json(recipes);
 })
 
 app.delete('/api/recipes', (req, res) => {
   const id = req.body.id;
 
-  //delete that object with id
-  res.json({ msg: 'Successfully deleted!' })
+  const index = recipes.findIndex(k => k.id == id);
+
+  recipes.splice(index, 1);
+  res.json(recipes)
+
 })
 
 
