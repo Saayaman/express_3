@@ -1,12 +1,23 @@
 const express = require('express');
 const recipes = require('./models/recipes')
 const uuidv1 = require('uuid/v1');
+const mongoose = require('mongoose');
+
 
 const app = express();
 
 // Body-parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // using querystring instead of qs
+
+//Connect to mongoDB
+mongoose.connect(ATLAS_URI, { useNewUrlParser: true, useCreateIndex: true });
+const connection = mongoose.connection;
+connection.once('open', () => {
+  //when connection succeeds
+  console.log('mongoDB connnection worked!');
+})
+
 
 app.get('/api/recipes', (req, res) => {
   // res.send("Recipes List")
