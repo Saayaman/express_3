@@ -2,6 +2,7 @@ const express = require('express');
 const recipes = require('./models/recipes')
 const uuidv1 = require('uuid/v1');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 
 const app = express();
@@ -11,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // using querystring instead of qs
 
 //Connect to mongoDB
-const ATLAS_URI = "mongodb+srv://saayaman:randompassword123@cluster0-cr0sj.gcp.mongodb.net/test?retryWrites=true&w=majority"
+const ATLAS_URI = process.env.ATLAS_URI;
 
 mongoose.connect(ATLAS_URI, {
   useNewUrlParser: true,

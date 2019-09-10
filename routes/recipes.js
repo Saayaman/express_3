@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
 
   //express function(Promise) to save new document in a collection
   newRecipes.save()
-  .then(() => res.json('Successfully added recipe'))
+  .then(() => res.send('Successfully added recipe'))
   .catch(err => res.status(400).json({ 'msg': `Could not save recipes: ${err}`}));
   
 });
