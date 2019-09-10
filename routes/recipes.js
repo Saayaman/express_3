@@ -42,13 +42,6 @@ router.put('/', (req, res) => {
   Recipes.findOneAndUpdate(query, newUpdatingData)
   .then(() => res.send('Updating success'))
   .catch(err => res.status(400).json({ 'msg': `Error: ${err}`}));
-
-  // const index = recipes.findIndex(k => k.id == id);
-  // recipes[index] = {
-  //   id: id,
-  //   name: name,
-  //   image_url,
-  // }
 })
 
 router.delete('/', (req, res) => {
