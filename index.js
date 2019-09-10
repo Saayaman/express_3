@@ -11,56 +11,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // using querystring instead of qs
 
 //Connect to mongoDB
-mongoose.connect(ATLAS_URI, { useNewUrlParser: true, useCreateIndex: true });
+const ATLAS_URI = "mongodb+srv://saayaman:randompassword123@cluster0-cr0sj.gcp.mongodb.net/test?retryWrites=true&w=majority"
+
+mongoose.connect(ATLAS_URI, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+});
 const connection = mongoose.connection;
 connection.once('open', () => {
   //when connection succeeds
   console.log('mongoDB connnection worked!');
 })
 
-
-app.get('/api/recipes', (req, res) => {
-  // res.send("Recipes List")
-  res.json(recipes);
-});
-
-app.post('/api/recipes', (req, res) => {
-  const { image_url, name } = req.body;
-
-  const newRecipes = {
-    id: uuidv1(),
-    image_url: image_url,
-    name: name,
-  };
-  
-  recipes.push(newRecipes);
-  res.json({ msg: "new recipe added!"});
-});
-
-app.put('/api/recipes', (req, res) => {
-  const id = req.body.id;
-  const name = req.body.name;
-  const image_url = req.body.image_url;
-
-  const index = recipes.findIndex(k => k.id == id);
-
-  recipes[index] = {
-    id: id,
-    name: name,
-    image_url,
-  }
-  res.json(recipes);
-})
-
-app.delete('/api/recipes', (req, res) => {
-  const id = req.body.id;
-
-  const index = recipes.findIndex(k => k.id == id);
-
-  recipes.splice(index, 1);
-  res.json(recipes)
-
-})
+// Routes
+app.use('/api/recipes', require('./routes/recipes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`))
