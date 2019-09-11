@@ -4,7 +4,6 @@ const uuidv1 = require('uuid/v1');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-
 const app = express();
 
 // Body-parser middleware
