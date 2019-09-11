@@ -25,6 +25,10 @@ connection.once('open', () => {
   console.log('mongoDB connnection worked!');
 })
 
+app.get('/', (req, res) => {
+ res.send('Hiiiiii');
+});
+
 // Routes
 app.use('/api/recipes', require('./routes/recipes'));
 
