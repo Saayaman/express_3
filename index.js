@@ -3,10 +3,12 @@ const recipes = require('./models/recipes')
 const uuidv1 = require('uuid/v1');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 
 // Body-parser middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // using querystring instead of qs
 
